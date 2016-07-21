@@ -1,0 +1,80 @@
+<div class="container-fluid">
+<% @page_title="登入界面" %>
+	<div class="row-fluid">
+		<% unless Rails.env.production?%>
+			<div class="alert alert-info">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<pre>
+<strong>此提示不在生产环境显示</strong>
+支付宝 - 暂无,使用实际生产帐号支付
+paypal - 支付系统沙盒环境(只支持德国)
+	用户名:mypost4u_buyer@126.com
+	密码:1qaz@WSX
+sofort - 支付系统测试项目(只支持德国)
+	Sort code or BIC:88888888
+	Account number:1234(任意大于4长度)
+	PIN:1234(任意大于4长度)</pre>
+			</div>
+		<% end %>
+
+		<div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<%=session['admin']%> 登入成功 : <%=@finance_summary.end_time%>
+		</div>
+
+		<% unless flash[:notice].blank? %>
+			<div class="alert alert-info">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<%=flash[:notice]%>
+			</div>
+		<% end %>
+
+		<div class="block">
+			<a href="#sign-stats" class="block-heading" data-toggle="collapse">昨日在线交易统计</a>
+			<div id="sign-stats" class="block-body collapse in">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>总比数</th>
+							<th>成功比数</th>
+							<th>总金额</th>
+							<th>成功金额</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><%=@finance_summary.total_num%></td>
+							<td>
+								<%=@finance_summary.succ_num + @finance_summary.succ_execption_num%>
+							</td>
+							<td><%=@finance_summary.total_amount%></td>
+							<td>
+								<%=@finance_summary.succ_amount + @finance_summary.succ_execption_amount%>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<% if @notices.present?  %>
+			<div class="block">
+				<a href="#notice-stats" class="block-heading" data-toggle="collapse">
+					待处理任务 (点击右上角tasks进入处理)
+				</a>
+				<div id="notice-stats" class="block-body collapse in">
+					<table class="table">
+						<tbody>
+							<% @notices.each do |notice| %>
+								<tr>
+									<td><%=notice.opertime%></td>
+									<td class="td_nowrap"><%=notice.title%></td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Finance</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+            <ul class="nav pull-right">
+                
+                <li id="fat-menu" class="dropdown">
+                    <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                        <% if session[:admin].blank? %>
+                        	尚未登入
+                        <% else %>                           
+                        	<i class="icon-user"></i> <%=session[:admin]%>
+                           	<i class="icon-caret-down"></i>
+		<ul class="dropdown-menu">
+			<li><%=link_to t('密码修改'),admin_manage_passwd_new_path,method: :get,tabindex: -1%></li>
+			<li class="divider"></li>
+			<% if isAuthority('99') %>
+				<li><%=link_to t('帐号设置'),admin_setting_index_path,method: :get,tabindex: -1%></li>
+				<li class="divider"></li>
+			<% end %>
+			<li><%=link_to t('登出'),admin_manage_sign_out_path,method: :post,tabindex: -1%></li>
+		</ul>
+                        <% end %>
+                    </a>
+                
+            </ul>
+            <a class="brand" href="index.html"><span class="second">财务管理系统</span></a>
+    </div>
+</div>
+
+<% if session[:admin].present? %>
+	<div class="sidebar-nav">	
+	    <a href="#user-menu" class="nav-header" data-toggle="collapse"><i class="icon-user-md"></i>用户管理</a>
+	    <ul id="user-menu" class="nav nav-list collapse in">
+	      <% if isAuthority('0') %>
+	        <li> <%=link_to t('用户明细'),registe_index_path,method: :get,class: "dd"%> </li>
+	      <% end %>
+	    </ul>
+
+	    <a href="#finance-menu" class="nav-header" data-toggle="collapse"><i class="icon-th-list"></i>财务管理</a>
+	    <ul id="finance-menu" class="nav nav-list collapse in">
+	      <% if isAuthority('1') %>
+	        <li > <%=link_to t('交易查询'),index_online_pay_path,method: :get%> </li>
+	      <% end %>
+	      <% if isAuthority('4') %>
+	        <li > <%=link_to t('交易汇总'),transaction_reconciliation_report_path,method: :get%> </li>
+	      <% end %>
+	      <% if isAuthority('2') %>
+	        <li > <%=link_to t('财务对账'),transaction_reconciliation_index_path,method: :get%> </li>
+	      <% end %>
+	      <% if isAuthority('3') %>
+	        <li > <%=link_to t('财务确认'),transaction_reconciliation_confirm_search_path,method: :get%> </li>
+	      <% end %>
+	      <% if isAuthority('14') %>
+	        <li > <%= link_to '电商报表',transaction_reconciliation_merchant_index_path,method: :get %> </li>
+	      <% end %>
+	    </ul>
+
+	    <a href="#file-menu" class="nav-header" data-toggle="collapse"><i class="icon-file"></i>文件上传</a>
+	    <ul id="file-menu" class="nav nav-list collapse in">
+	      <% if isAuthority('5') %>
+	        <li > <%=link_to t('文件上传'),upload_file_index_path,method: :get%> </li>
+	      <% end %>
+	    </ul>
+
+	    <a href="#simulate-menu" class="nav-header" data-toggle="collapse"><i class="icon-indent-left"></i>模拟交易</a>
+	    <ul id="simulate-menu" class="nav nav-list collapse in">
+	      <% if isAuthority('6') %>
+	        <li > <%= link_to '模拟支付',simulation_path %> </li>
+	      <% end %>
+	      <% if isAuthority('7') %>
+	        <li > <%= link_to '模拟对账',simulation_simulate_reconciliation_path,method: :get %> </li>
+	      <% end %>
+	    </ul>
+
+	</div>
+<% end %>
+
+<% if session[:admin].present? %>
+        <div class="content">
+ <% else %>
+        <div class="no_content">
+ <% end %>
+	<div class="header">
+		<% if session[:admin].present? %>
+		<div class="stats">
+			<p class="stat">
+				<span class="number">
+					<% if isAuthority('12') %>
+					  <%= Notice.get_all_num %>
+					<% else %>
+					  0
+					<% end %>
+				</span>
+				<%=link_to 'tasks',notice_index_path(flag: '0') %>
+			</p>
+			<p class="stat"><span class="number">0</span>waiting</p>
+		</div>
+		<% end %>
+		<h1 class="page-title"><%=@page_title || 'title' %></h1>
+	</div>
+
+	<ul class="breadcrumb">
+		<li> <%=link_to t('首页'),admin_manage_sign_index_path,method: :get%> <span class="divider">/</span></li>
+		<%= yield :breadcrumb %>
+		<li class="active"><%=@page_title || 'title' %></li>
+	</ul>
+
+	<%= yield %>
+</div>
+
+</body>
+</html>

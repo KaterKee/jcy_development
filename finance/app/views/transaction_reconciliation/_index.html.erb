@@ -1,0 +1,51 @@
+<tr class="tr_relpace">
+	<td class="td_nowrap">  <%= reconciliation_detail.payway %> </td>
+	<td class="td_nowrap">  <%= reconciliation_detail.paytype%>  </td>
+	<td class="td_nowrap">  
+		<span title="<%=reconciliation_detail.transactionid%>  ">
+			<%=reconciliation_detail.transactionid%>  
+		</span>
+	</td>
+	<td class="td_nowrap"> 
+		<% unless reconciliation_detail.online_pay.blank? %> 
+			<a href="#" onclick="window.open('<%=show_single_online_pay_path(reconciliation_detail.online_pay)%>',
+				'_blank','scrollbars=0,toolbar=no,location=no,directories=no,status=yrd,menubar=no,scrollbars=no,resizable=yes;width=200');
+				return false">
+				<span title="<%=reconciliation_detail.online_pay.order_no%>  ">
+					<%=reconciliation_detail.online_pay.order_no%>
+				</span>
+			</a>
+		<% end %> 
+	</td>
+	<td class="td_nowrap">  <%= reconciliation_flag_mapping(reconciliation_detail.reconciliation_flag) %>  </td>
+	<td class="td_nowrap">  <%= reconciliation_detail.amt %>  </td>
+	<td class="td_nowrap">  <%= reconciliation_detail.currencycode %>  </td>
+<!-- 	<td>  <%= reconciliation_detail.transaction_status %>  </td>
+	<td> 
+		<% unless reconciliation_detail.online_pay_id.blank? %> 
+			<% unless reconciliation_detail.online_pay.blank? %>
+				<%= link_to reconciliation_detail.online_pay.trade_no,show_single_online_pay_path(reconciliation_detail.online_pay_id) %>
+			<% else %>
+				无对应在线支付记录数据,ID:<%= reconciliation_detail.online_pay_id %>
+			<% end %>
+			</br>
+		<% end %> 
+		<%= reconciliation_detail.reconciliation_describe %>
+	</td> -->
+	<td class="td_nowrap">  
+		<span title="<%= reconciliation_detail.timestamp %>  ">
+			<%= reconciliation_detail.timestamp %>  
+		</span>
+	</td>
+	<td>  
+		<% if isAuthority("8") %>
+			<% if  reconciliation_detail.reconciliation_flag==ReconciliationDetail::RECONCILIATIONDETAIL_FLAG['SUCC'] %> 
+				<%= link_to "手工撤销",modify_transaction_reconciliation_path(transactionid: reconciliation_detail.id,flag: reconciliation_detail.reconciliation_flag),method: "post",data: { confirm: "请确认是否手工撤销对账成功记录?\n#{reconciliation_detail.transactionid}: #{reconciliation_detail.currencycode} #{reconciliation_detail.amt}" } %>
+			<% else %>
+				<a href="#" onclick="modify_reconciliation('<%=reconciliation_detail.id%>','<%=reconciliation_detail.reconciliation_flag%>','<%="#{reconciliation_detail.transactionid}: #{reconciliation_detail.currencycode} #{reconciliation_detail.amt}"%>');return false">
+					手工对账
+				</a>
+			<% end %>
+		<% end %>
+	</td>
+</tr>

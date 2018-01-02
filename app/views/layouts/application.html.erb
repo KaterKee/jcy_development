@@ -10,11 +10,15 @@
     <link rel="icon" href="/assets/shalan.ico" type="image/x-icon"/>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application' , media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "/slzj_css/new_table" %>
+    <%= stylesheet_link_tag "/slzj_css/layout(1)" %>
+    <%= stylesheet_link_tag "/slzj_css/layout" %>
+    <%= stylesheet_link_tag "/slzj_css/home" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body style="background-color:#28FF28">
+  <body>
     <%= yield %>
   </body>
 </html>

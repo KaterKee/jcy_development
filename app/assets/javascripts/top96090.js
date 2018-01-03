@@ -1,0 +1,1 @@
+document.writeln("<a class=\"topban_1\" id=\"topban\" href=\"http://www.tsdm.me/forum.php?mod=viewthread&tid=859571\"target=\"_blank\"><img id=\"topbanimg\" src=\"http://wx2.sinaimg.cn/large/7044f931gy1fm5wb2cgcuj20qo023tbp.jpg\" alt=\"\" width=\"960\" height=\"90\" \/><\/a>")

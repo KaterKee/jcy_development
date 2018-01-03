@@ -1,1 +1,0 @@
-document.writeln("<script type=\"text\/javascript\"  src=\"http:\/\/ab.dydab.com\/ab\/sync\/80.js\"><\/script>")

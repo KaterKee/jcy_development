@@ -1,2 +1,0 @@
-module AdminSettingHelper
-end

@@ -1,0 +1,30 @@
+<div class="header-bottom">  
+     <div class="wrap">
+        <div class="header-left" id="home">
+          <section>
+            <ul class="lb-album" >
+                <%if @princesses.count > 0%>
+                    <%@princesses.each do |princess|%>
+                        <li>
+                            <a href="#image-1">
+                                <img src="<%=princess.icon_url%>" alt="image01">
+                                <span><%=princess.cn_name%></span>
+                            </a>
+                            <div class="lb-overlay" id="image-1">
+                                <a href="#page" class="lb-close">x Close</a>
+                                <img src="<%=princess.icon_url%>" alt="image01">
+                                <div>
+                                    <h3>pointe <span>/point/</span></h3>
+                                    <p>Dance performed on the tips of the toes</p>
+                                </div>
+                            </div>
+                        </li>
+                    <%end%>
+                <%end%>
+                <div class="clear"></div>
+            </ul>
+        </section>
+        <div class="clear"></div>
+    </div>
+ </div>
+ <div class="clear"></div>

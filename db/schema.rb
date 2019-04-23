@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190418060527) do
+ActiveRecord::Schema.define(version: 20190423081227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,12 @@ ActiveRecord::Schema.define(version: 20190418060527) do
     t.boolean "is_weaponed", default: false
     t.integer "atk_point"
     t.integer "star"
+    t.string "skill_1"
+    t.string "skill_2"
+    t.string "skill_ex"
+    t.string "skill_ub"
+    t.string "skill_cg"
+    t.string "role_cg"
   end
 
   create_table "users", force: :cascade do |t|

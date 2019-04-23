@@ -1,0 +1,5 @@
+<%= form_for(@princess) do |f| %>
+    <%= f.file_field :icon, class: "form-control" %>
+    <%= f.text_field :cn_name,class: "form-control"%>
+    <%= f.submit '提交', class:"btn btn-primary submit"%>
+<%end%>

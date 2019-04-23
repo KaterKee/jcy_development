@@ -3,18 +3,20 @@
   <head>
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
-    <title>傻蓝之家</title>
-    <meta name="keywords" content="傻蓝之家">
-    <meta name="description" content="傻蓝之家">
+    <title>公主连接</title>
+    <meta name="keywords" content="Princess Connect Re:Dive">
+    <meta name="description" content="Princess Connect Re:Dive">
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
-    <link rel="icon" href="/assets/shalan.ico" type="image/x-icon"/>
+    <link rel="icon" href="/assets/pcr.jpg" type="image/jpeg"/>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag 'application' , media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'style' , media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= yield :self_style %>
     <%= yield :login %>
     <%= yield :register %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'jquery-1.8.3.min', 'data-turbolinks-track': 'reload' %>
 
     <%= yield :self_js %>
     <%= yield :register_js %>
